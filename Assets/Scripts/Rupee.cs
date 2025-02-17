@@ -1,23 +1,15 @@
+using System;
 using UnityEngine;
 
 public class Rupee : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public event Action<Rupee> OnCollected;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            OnCollected?.Invoke(this);
             Destroy(gameObject);
         }
     }
